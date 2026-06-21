@@ -1,0 +1,38 @@
+function ueSocialShareButtons(){var g_textClass,g_linkClass,g_listClass,g_buttonClass,g_containerClass,g_classHover;var g_objWidget,g_objShareLinks,g_objShareList,g_objShareButton,g_objShareContainer;var g_currentPageUrl,g_targetPageUrl,g_layoutType,g_openTrigger,g_targetUrlType,g_customPageUrl,g_isInEditor;function setFacebookShareLink(objLink){var facebookShareUrl=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(g_targetPageUrl)}`;objLink.attr("data-link",facebookShareUrl)}
+function setTwitterShareLink(objLink){var twitterShareUrl=`https://twitter.com/intent/tweet?url=${encodeURIComponent(g_targetPageUrl)}`;objLink.attr("data-link",twitterShareUrl)}
+function setWhatsappShareLink(objLink){var whatsappShareUrl=`https://api.whatsapp.com/send?text=${encodeURIComponent(g_targetPageUrl)}`;objLink.attr("data-link",whatsappShareUrl)}
+function setLinkedinShareLink(objLink){var linkedinShareUrl=`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(g_targetPageUrl)}`;objLink.attr("data-link",linkedinShareUrl)}
+function setPinterestShareLink(objLink){var pinterestShareUrl=`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(g_targetPageUrl)}`;objLink.attr("data-link",pinterestShareUrl)}
+function setTelegramShareLink(objLink){var telegramShareUrl=`https://t.me/share/url?url=${encodeURIComponent(g_targetPageUrl)}`;objLink.attr("data-link",telegramShareUrl)}
+function setXingShareLink(objLink){var xingShareUrl=`https://www.xing.com/spi/shares/new?url=${encodeURIComponent(g_targetPageUrl)}`;objLink.attr("data-link",xingShareUrl)}
+function setPrintLink(objLink){var printLink=`javascript:window.print();`;objLink.attr("data-link",printLink)}
+function openEmailLink(){var emailLink=`mailto:?body=${encodeURIComponent(g_targetPageUrl)}`;let a=document.createElement('a');a.href=emailLink;a.style.display='none';document.body.appendChild(a);a.click();document.body.removeChild(a)}
+function setCopyShareLink(objLink){objLink.attr("data-link",g_targetPageUrl)}
+function copyLinkToClipboard(objLink,link){navigator.clipboard.writeText(link).then(()=>{var objCopyLink=objLink;var objCopyLinkText=objCopyLink.find(`.${g_textClass}`);var dataCopiedText=objLink.data(`copied-text`);var originalText=objCopyLinkText.text();objCopyLinkText.text(dataCopiedText);setTimeout(function(){objCopyLinkText.text(originalText)},1500)}).catch(err=>{console.error('Failed to copy: ',err)})}
+function openPrintLink(){window.print()}
+function initShareLinks(){g_objShareLinks.each(function(){var objLink=jQuery(this);var dataLinkType=objLink.data("link-type");switch(dataLinkType){case "facebook":setFacebookShareLink(objLink);break;case "twitter":setTwitterShareLink(objLink);break;case "whatsapp":setWhatsappShareLink(objLink);break;case "link":setCopyShareLink(objLink);break
+case "print":setPrintLink(objLink);break
+case "linkedin":setLinkedinShareLink(objLink);break
+case "pinterest":setPinterestShareLink(objLink);break
+case "telegram":setTelegramShareLink(objLink);break
+case "xing":setXingShareLink(objLink);break}})}
+function onShareLinkClick(){if(g_isInEditor=="yes")
+return(!0);var objLink=jQuery(this);var link=objLink.attr("data-link");var dataLinkType=objLink.attr("data-link-type");var width=600;var height=400;var left=(window.screen.width-width)/2;var top=(window.screen.height-height)/2;if(dataLinkType!="link"&&dataLinkType!="email"&&dataLinkType!="print")
+window.open(link,'_blank',`width=${width},height=${height},left=${left},top=${top}`);else if(dataLinkType=="link")
+copyLinkToClipboard(objLink,link);else if(dataLinkType=="email")
+openEmailLink();else if(dataLinkType=="print")
+openPrintLink()}
+function onObjShareButtonMouseOver(){if(g_layoutType!="dropdown")
+return(!0);if(g_openTrigger!="hover")
+return(!0);g_objShareList.addClass(g_classHover)}
+function onObjShareButtonMouseClick(){if(g_layoutType!="dropdown")
+return(!0);if(g_openTrigger!="click")
+return(!0);g_objShareList.addClass(g_classHover)}
+function onObjShareContainerMouseLeave(){if(g_layoutType!="dropdown")
+return(!0);var objContainer=jQuery(this);var isListOpened=g_objShareList.hasClass(g_classHover);if(isListOpened==!1)
+g_objShareList.removeClass(g_classHover);setTimeout(function(){if(objContainer.is(":hover")==!1){g_objShareList.removeClass(g_classHover);g_objShareList.removeClass(g_classHover)}},1500)}
+function getTargetUrl(){var targetUrl;if(g_targetUrlType=="current")
+targetUrl=g_currentPageUrl;if(g_targetUrlType=="custom")
+targetUrl=g_customPageUrl
+return(targetUrl)}
+this.init=function(options){var widgetId=options.id;var currentPageUrl=options.currentPageUrl;var layoutType=options.layoutType;var openTrigger=options.openTrigger;var targetUrlType=options.targetUrlType;var customPageUrl=options.customPageUrl;var isInEditor=options.isInEditor;g_objWidget=jQuery(`#${widgetId}`);g_currentPageUrl=currentPageUrl;g_layoutType=layoutType;g_openTrigger=openTrigger;g_targetUrlType=targetUrlType;g_customPageUrl=customPageUrl;g_targetPageUrl=getTargetUrl();g_isInEditor=isInEditor;g_textClass="ue-social-buttons-share-list-item-text";g_linkClass="ue-social-buttons-share-list-item";g_listClass="ue-social-buttons-share-list";g_buttonClass="ue-social-buttons-share-button";g_containerClass="ue-social-buttons-container";g_classHover="uc-hover";g_objShareContainer=g_objWidget.find(`.${g_containerClass}`);g_objShareButton=g_objWidget.find(`.${g_buttonClass}`);g_objShareList=g_objWidget.find(`.${g_listClass}`);g_objShareLinks=g_objWidget.find(`.${g_linkClass}`);initShareLinks();g_objShareLinks.on("click",onShareLinkClick);g_objShareButton.on("mouseover",onObjShareButtonMouseOver);g_objShareButton.on("click",onObjShareButtonMouseClick);g_objShareContainer.on("mouseleave",onObjShareContainerMouseLeave)}}

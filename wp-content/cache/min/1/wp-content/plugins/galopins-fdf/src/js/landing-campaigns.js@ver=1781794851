@@ -1,0 +1,13 @@
+jQuery(function($){'use strict';function plmt_format_amount(amount){const euros=amount/100;const formatted=euros.toLocaleString('fr-FR',{minimumFractionDigits:0,maximumFractionDigits:0});return formatted+' €'}
+function plmt_animate_counter($element,start,end,duration){const startTime=Date.now();const range=end-start;function step(){const elapsed=Date.now()-startTime;const progress=Math.min(elapsed/duration,1);const eased=1-Math.pow(1-progress,3);const current=Math.floor(start+(range*eased));$element.text(plmt_format_amount(current));if(progress<1){requestAnimationFrame(step)}else{$element.text(plmt_format_amount(end))}}
+requestAnimationFrame(step)}
+function plmt_update_landing_campaigns(){const $block=$('.landing-donation-block');if(typeof plmtLandingCampaigns==='undefined'||!plmtLandingCampaigns){if($block.length){$block.hide();$block.attr('aria-hidden','true')}
+return}
+const data=plmtLandingCampaigns;if(!data.totalAmount&&!data.goalAmount){if($block.length){$block.hide();$block.attr('aria-hidden','true')}
+return}
+if($block.length){$block.show();$block.attr('aria-hidden','false')}
+const $totalElement=$('.landing-donation-total');if($totalElement.length){let duration=2000;if(data.totalAmount<10000){duration=500}else if(data.totalAmount<100000){duration=1000}else if(data.totalAmount<1000000){duration=1500}
+plmt_animate_counter($totalElement,0,data.totalAmount,duration)}
+const $jaugeElement=$('.landing-donation-jauge');if($jaugeElement.length){if(data.goalAmount>0){$jaugeElement.show();$jaugeElement.attr('aria-hidden','false');const $goalText=$jaugeElement.find('.elementor-title');if($goalText.length){const formattedGoal=plmt_format_amount(data.goalAmount);$goalText.html('Objectif&nbsp;:&nbsp;'+formattedGoal)}
+const $progressBar=$jaugeElement.find('.elementor-progress-bar');const $progressWrapper=$jaugeElement.find('.elementor-progress-wrapper');if($progressBar.length&&$progressWrapper.length){$progressWrapper.attr('aria-valuenow',data.percentage);$progressWrapper.attr('aria-valuetext',data.percentage+'% de l\'objectif atteint');$progressBar.css('width','0%');$progressBar.animate({width:data.percentage+'%'},1500,'swing',function(){$progressBar.attr('data-max',data.percentage)})}}else{$jaugeElement.hide();$jaugeElement.attr('aria-hidden','true')}}}
+$(document).ready(function(){plmt_update_landing_campaigns()})})

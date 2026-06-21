@@ -1,0 +1,20 @@
+document.addEventListener('DOMContentLoaded', function () {
+
+    /* =========================================================================
+    Wrap highlighted elements in a new div with the same highlight class
+    ========================================================================= */
+
+    const highlightedElements = document.querySelectorAll('span');
+    highlightedElements.forEach(function (element) {
+        if (element.classList.toString().includes('highlight') && !element.classList[0].includes('numero')) {
+            element.classList.add('highlight');
+            // element.parentElement.insertBefore(newDiv, element);
+            // newDiv.appendChild(element);
+
+            // if (element.classList[0].includes('highlight') && !element.classList[0].includes('numero')) {
+            //     newDiv.classList.add(element.classList[0]);
+            //     element.classList.remove(element.classList[0]);
+            // }
+        }
+    });
+});

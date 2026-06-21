@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="Calque_1" data-name="Calque 1" viewBox="0 0 810.37 387.05">
+  <defs>
+    <style>
+      .cls-1 { fill: none; }
+      .cls-127 { fill: #fff; }
+      .cls-182 { fill: #e4e7e5; }
+      .cls-218 { fill: #714ffc; }
+      .brand-title {
+        font-family: 'Poppins', 'Inter', sans-serif;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </defs>
+  <g>
+    <!-- Purple shield background -->
+    <polygon class="cls-218" points="299.09 121.47 299.09 265.59 174.28 337.65 49.47 265.59 49.47 121.47 174.28 49.41 299.09 121.47"></polygon>
+    <g>
+      <!-- Shield symbols -->
+      <path class="cls-182" d="M223.53,131.8l-26.25,26.24-17.13-17.67-.49-.51c-1.46-1.47-3.38-2.2-5.3-2.2s-3.84.74-5.31,2.2l-.56.57-17.2,17.62-26.24-26.26,17.41-17.39,5.88-5.88c14.36-14.37,37.68-14.37,52.04,0l5.79,5.82,17.36,17.44Z"></path>
+      <rect class="cls-1" x="155.87" y="188.66" width="36.82" height="36.81" transform="translate(-95.37 183.86) rotate(-44.99)"></rect>
+      <polygon class="cls-127" points="230.49 237.23 230.49 289.3 192.32 251.13 174.28 233.09 118.08 289.29 118.08 237.23 125.69 229.64 147.9 207.41 148.25 207.06 130.29 189.11 125.04 183.86 125.04 131.8 156.32 163.08 174.28 181.03 223.53 131.8 223.53 183.86 200.31 207.06 218.36 225.1 230.49 237.23"></polygon>
+      <line class="cls-1" x1="174.31" y1="233.12" x2="200.34" y2="207.09"></line>
+      <line class="cls-1" x1="174.31" y1="181.06" x2="147.93" y2="207.44"></line>
+    </g>
+  </g>
+  <!-- Brand Name Typography -->
+  <text x="340" y="190" class="brand-title" font-size="76" fill="#1e1e1e">WOMEN</text>
+  <text x="340" y="275" class="brand-title" font-size="76" fill="#714ffc">SIDE</text>
+</svg>

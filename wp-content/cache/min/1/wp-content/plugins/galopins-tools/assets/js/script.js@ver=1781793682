@@ -1,0 +1,1 @@
+document.addEventListener('DOMContentLoaded',function(){const highlightedElements=document.querySelectorAll('span');highlightedElements.forEach(function(element){if(element.classList.toString().includes('highlight')&&!element.classList[0].includes('numero')){element.classList.add('highlight')}})})

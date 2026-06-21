@@ -1,0 +1,14 @@
+# Ignore the raw download folder (only the processed files at root are needed)
+fondationdesfemmes_download/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor folders
+.vscode/
+.idea/
+
+# Logs
+*.log

@@ -1,0 +1,76 @@
+(function ($) {
+  'use strict';
+
+  /**
+   * Fix Loop Carousel pagination by reassigning the pagination element
+   * @since 1.0.0
+   */
+
+  function fixLoopCarouselPagination() {
+
+    $('.elementor-widget-loop-carousel, .elementor-widget-n-carousel').each(function () {
+      console.log('FIX', $(this));
+      var $widget = $(this);
+      var $swiperContainer = $widget.find('.swiper-container, .swiper').first();
+      var $pagination = $widget.find('.swiper-pagination').first();
+
+      if ($swiperContainer.length && $swiperContainer[0].swiper && $pagination.length) {
+        var swiper = $swiperContainer[0].swiper;
+
+        // Clear existing content
+        $pagination.empty();
+
+        // Reassign pagination element to Swiper instance
+        swiper.params.pagination.el = $pagination[0];
+
+        // Update pagination object references
+        swiper.pagination.el = $pagination[0];
+        swiper.pagination.$el = $($pagination[0]);
+
+        // Initialize and render pagination
+        swiper.pagination.init();
+        swiper.pagination.render();
+        swiper.pagination.update();
+
+        // Remove swiper-pagination-horizontal class if present
+        if ($pagination.hasClass('swiper-pagination-horizontal')) {
+          $pagination.removeClass('swiper-pagination-horizontal');
+        }
+
+        // Remove swiper-pagination-bullets class if present
+        if ($pagination.hasClass('swiper-pagination-bullets')) {
+          $pagination.removeClass('swiper-pagination-bullets');
+        }
+
+        // Add fixed-bullets class for consistent styling
+        if (!$pagination.hasClass('fixed-bullets')) {
+          $pagination.addClass('fixed-bullets');
+        }
+
+        // Log success for debugging
+        if (window.console && window.console.log) {
+          console.log('Loop Carousel pagination fixed - Bullets generated:', $pagination.find('.swiper-pagination-bullet').length);
+          console.log('Horizontal class removed:', !$pagination.hasClass('swiper-pagination-horizontal'));
+        }
+      }
+    });
+  }
+
+  /**
+   * Execute after full page load
+   */
+  $(window).on('load', function () {
+    setTimeout(fixLoopCarouselPagination, 500);
+  });
+
+  /**
+   * Hook into Elementor frontend initialization
+   */
+  if (typeof elementorFrontend !== 'undefined') {
+    elementorFrontend.hooks.addAction('frontend/element_ready/loop-carousel.default', function ($scope) {
+      setTimeout(function () {
+        fixLoopCarouselPagination();
+      }, 200);
+    });
+  }
+})(jQuery);

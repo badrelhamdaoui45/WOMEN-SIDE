@@ -1,0 +1,18 @@
+jQuery(function($){'use strict';let plmtCounterRaf=null;let plmtAppliedCounter=null;function plmtFormatNumber(num){return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
+function plmtAnimateCounter($element,start,end,duration){const startTime=Date.now();const range=end-start;if(null!==plmtCounterRaf){cancelAnimationFrame(plmtCounterRaf);plmtCounterRaf=null}
+function step(){const elapsed=Date.now()-startTime;const progress=Math.min(elapsed/duration,1);const eased=1-Math.pow(1-progress,3);const current=Math.floor(start+(range*eased));$element.text(plmtFormatNumber(current));if(progress<1){plmtCounterRaf=requestAnimationFrame(step)}else{$element.text(plmtFormatNumber(end));plmtCounterRaf=null}}
+plmtCounterRaf=requestAnimationFrame(step)}
+function plmtUpdatePetitionDisplay(animate){if('undefined'===typeof plmtPetition){return}
+animate=animate||!1;const counter=parseInt(plmtPetition.counter,10)||0;const objective=parseInt(plmtPetition.objective,10)||0;const $petitionSigns=$('.petition-signs');if($petitionSigns.length){const $counterSpan=$petitionSigns.find('span').first();if($counterSpan.length){if(animate){const currentValue=parseInt($counterSpan.text().replace(/\s/g,''),10)||0;plmtAnimateCounter($counterSpan,currentValue,counter,1500)}else{let duration=2000;if(counter<10){duration=500}else if(counter<100){duration=1000}else if(counter<1000){duration=1500}
+plmtAnimateCounter($counterSpan,0,counter,duration)}}}
+const $petitionJauge=$('.petition-jauge');if($petitionJauge.length){if(objective>0){$petitionJauge.show();const $title=$petitionJauge.find('.elementor-title');if($title.length){$title.text('Objectif : '+plmtFormatNumber(objective)+' signatures')}
+const percentage=Math.min(Math.round((counter/objective)*100),100);const $progressWrapper=$petitionJauge.find('.elementor-progress-wrapper');const $progressBar=$petitionJauge.find('.elementor-progress-bar');if($progressWrapper.length&&$progressBar.length){$progressWrapper.attr('aria-valuenow',percentage);if(animate){$progressBar.animate({width:percentage+'%'},1500,'swing')}else{$progressBar.css('width',percentage+'%')}
+$progressBar.attr('data-max',percentage)}}else{$petitionJauge.hide()}}}
+function plmtGetResponseData(response){if(!response){return null}
+return response.data?response.data:response}
+function plmtReplaceSuccessMessage($context,message){if(!message){return}
+setTimeout(function(){let $message=($context&&$context.length)?$context.find('.elementor-message-success'):$();if(!$message.length){$message=$('.elementor-message-success')}
+if($message.length){$message.last().text(message)}},100)}
+$(document).ready(function(){plmtUpdatePetitionDisplay(!1)});$(document).on('submit_success',function(event,response){if('undefined'===typeof plmtPetition){return}
+const data=plmtGetResponseData(response);if(!data){return}
+if(!0===data.is_new_signature){const serverCounter=parseInt(data.petition_counter,10);if(!isNaN(serverCounter)&&serverCounter!==plmtAppliedCounter){plmtAppliedCounter=serverCounter;const $counterSpan=$('.petition-signs').find('span').first();const shown=$counterSpan.length?(parseInt($counterSpan.text().replace(/\s/g,''),10)||0):0;plmtPetition.counter=shown+1;plmtUpdatePetitionDisplay(!0)}}else if(!1===data.is_new_signature){plmtReplaceSuccessMessage($(event.target),data.update_message)}})})
