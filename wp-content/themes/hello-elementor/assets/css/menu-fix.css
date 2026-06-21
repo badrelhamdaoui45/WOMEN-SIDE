@@ -1,0 +1,139 @@
+/* =====================================================
+   WOMEN SIDE — Menu Fix CSS
+   Makes the Elementor Mega Menu work as a static site
+   ===================================================== */
+
+/* ---------- Desktop dropdown container ---------- */
+.e-n-menu {
+  position: relative;
+}
+
+.e-n-menu-heading {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.e-n-menu-item {
+  position: relative;
+}
+
+/* Hide dropdown content by default */
+.e-n-menu-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background: #fff;
+  min-width: 520px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.13);
+  border-radius: 12px;
+  overflow: hidden;
+  animation: menuFadeIn 0.18s ease;
+}
+
+/* Show when JS adds the class */
+.e-n-menu-content--visible {
+  display: block !important;
+}
+
+@keyframes menuFadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-6px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* Keep dropdown visible while hovering it */
+.e-n-menu-item:hover .e-n-menu-content,
+.e-n-menu-item.e-n-menu-item--active .e-n-menu-content {
+  display: block;
+}
+
+/* ---------- Menu title / trigger ---------- */
+.e-n-menu-title {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.e-n-menu-title-text {
+  font-weight: 600;
+}
+
+.e-n-menu-item--active .e-n-menu-title-text {
+  color: #714ffc;
+}
+
+/* ---------- Dropdown icon chevron ---------- */
+.e-n-menu-dropdown-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.e-n-menu-dropdown-icon-opened { display: none; }
+.e-n-menu-dropdown-icon-closed { display: inline; }
+
+.e-n-menu-dropdown-icon[aria-expanded="true"] .e-n-menu-dropdown-icon-opened { display: inline; }
+.e-n-menu-dropdown-icon[aria-expanded="true"] .e-n-menu-dropdown-icon-closed { display: none; }
+
+/* ---------- Mobile menu ---------- */
+@media (max-width: 1024px) {
+  .e-n-menu-wrapper {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #fff;
+    z-index: 99999;
+    overflow-y: auto;
+    padding: 60px 24px 24px;
+  }
+
+  .e-n-menu-wrapper--open {
+    display: block !important;
+  }
+
+  .e-n-menu-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .e-n-menu-item {
+    width: 100%;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .e-n-menu-content {
+    position: static;
+    transform: none;
+    min-width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    background: #f9f6ff;
+    border-left: 3px solid #714ffc;
+    margin-left: 12px;
+  }
+
+  .e-n-menu-toggle {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .e-n-menu-toggle {
+    display: none !important;
+  }
+
+  .e-n-menu-wrapper {
+    display: block !important;
+  }
+}
