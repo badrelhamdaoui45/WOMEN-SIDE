@@ -13,7 +13,7 @@ const NAV_HTML = `
   #ws-header {
     position: sticky;
     top: 0;
-    z-index: 99999;
+    z-index: 999999;
     background: #fff;
     box-shadow: 0 2px 16px rgba(0,0,0,.08);
     font-family: 'Inter', sans-serif;
@@ -313,7 +313,7 @@ const NAV_HTML = `
             <div>
               <div class="ws-col-title">Donner</div>
               <div class="ws-dropdown-links">
-                <a href="/faire-un-don/">Faire un don <svg class="ws-arrow" fill="currentColor" viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg></a>
+                <a href="/donner/">Faire un don <svg class="ws-arrow" fill="currentColor" viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg></a>
                 <a href="/legs-donation/">Faire un legs / donation <svg class="ws-arrow" fill="currentColor" viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg></a>
                 <a href="/mobiliser-son-entreprise/">Mobiliser son entreprise <svg class="ws-arrow" fill="currentColor" viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg></a>
               </div>
@@ -352,7 +352,7 @@ const NAV_HTML = `
 
     <!-- Right buttons (desktop) -->
     <div id="ws-nav-right">
-      <a href="/faire-un-don/" class="ws-btn-donate">Je donne ♥</a>
+      <a href="/donner/" class="ws-btn-donate">Je donne ♥</a>
       <a href="/nous-contacter/" class="ws-btn-contact">Nous contacter</a>
     </div>
 
@@ -387,7 +387,7 @@ const NAV_HTML = `
   <div class="ws-mobile-item">
     <button class="ws-mobile-trigger">Agir avec nous <svg class="ws-chevron" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></button>
     <div class="ws-mobile-sub">
-      <a href="/faire-un-don/">Faire un don</a>
+      <a href="/donner/">Faire un don</a>
       <a href="/legs-donation/">Faire un legs / donation</a>
       <a href="/mobiliser-son-entreprise/">Mobiliser son entreprise</a>
       <a href="/agir-avec-nous-lancer-une-collecte/">Lancer une collecte</a>
@@ -407,7 +407,7 @@ const NAV_HTML = `
     </div>
   </div>
   <div class="ws-mobile-btns">
-    <a href="/faire-un-don/" class="ws-btn-donate">Je donne ♥</a>
+    <a href="/donner/" class="ws-btn-donate">Je donne ♥</a>
     <a href="/nous-contacter/" class="ws-btn-contact">Nous contacter</a>
   </div>
 </nav>
@@ -454,7 +454,7 @@ const NAV_HTML = `
 // Regex to find the Elementor header/nav block to replace
 // We replace from the opening <header> tag (containing elementor-location-header)
 // all the way to its closing </header>
-const HEADER_REGEX = /<header[^>]*elementor-location-header[^>]*>[\s\S]*?<\/header>/;
+const HEADER_REGEX = /(<!-- ===== WOMEN SIDE — STANDALONE NAVIGATION ===== -->[\s\S]*?<!-- ===== END WOMEN SIDE NAVIGATION ===== -->|<header[^>]*elementor-location-header[^>]*>[\s\S]*?<\/header>)/;
 
 let updated = 0;
 

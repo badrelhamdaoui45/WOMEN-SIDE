@@ -22,7 +22,7 @@ function processFile(filePath) {
   const newContent = content.replace(FOOTER_DONATE_REGEX, (match, p1, p2) => {
     // Remove target="_blank" and extra spaces from the remaining attributes of the <a> tag
     const cleanP2 = p2.replace(/\s*target="_blank"/gi, '').replace(/\s+/g, ' ');
-    return p1 + '/faire-un-don/' + cleanP2;
+    return p1 + 'http://127.0.0.1:8080/faire-un-don/' + cleanP2;
   });
 
   if (newContent !== content) {

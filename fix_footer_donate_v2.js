@@ -20,7 +20,7 @@ function processFile(filePath) {
   if (content.includes('data-id="cf0eab1"')) {
     const newContent = content.replace(CF0EAB1_GENERIC_REGEX, (match, p1, p2) => {
       const cleanP2 = p2.replace(/\s*target="_blank"/gi, '').replace(/\s+/g, ' ');
-      return p1 + '/faire-un-don/' + cleanP2;
+      return p1 + '/donner/' + cleanP2;
     });
     if (newContent !== content) {
       content = newContent;
@@ -32,7 +32,7 @@ function processFile(filePath) {
   if (content.includes('data-id="20bc3bd"')) {
     const newContent = content.replace(W20BC3BD_REGEX, (match, p1, p2) => {
       const cleanP2 = p2.replace(/\s*target="_blank"/gi, '').replace(/\s+/g, ' ');
-      return p1 + '/faire-un-don/' + cleanP2;
+      return p1 + '/donner/' + cleanP2;
     });
     if (newContent !== content) {
       content = newContent;
